@@ -1,42 +1,28 @@
 # Análisis comparativo de Quick Sort y Merge Sort
 
-## Descripción
+## 📌 Descripción
+Proyecto académico de la Unidad 01 orientado al análisis comparativo de los algoritmos de ordenamiento Quick Sort y Merge Sort mediante un experimento implementado en C++[cite: 5].
 
-Proyecto académico de la Unidad 01 orientado al análisis comparativo de los algoritmos de ordenamiento Quick Sort y Merge Sort mediante un experimento implementado en C++.
-
-## Objetivo
-
+## 🎯 Objetivo
 Comparar el rendimiento de ambos algoritmos considerando diferentes tamaños y patrones de entrada, utilizando métricas de tiempo de ejecución y operaciones internas.
 
-## Tecnologías utilizadas
+## 🛠️ Tecnologías utilizadas
+* C++ (Librería estándar `<iostream>`)
+* Dev-C++ / Compilador C++
+* LaTeX / Overleaf
+* Git y GitHub
 
-- C++
-- Dev-C++
-- LaTeX
-- Overleaf
-- GitHub
+## 📂 Estructura del Repositorio
+El repositorio se encuentra organizado bajo los estándares académicos exigidos:
+* **`src/`**: Contiene los códigos fuentes modulares de los algoritmos (`quicksort.cpp`, `mergesort.cpp`) con entrada manual[cite: 8].
+* **`data/`**: Almacena los conjuntos de datos experimentales y archivos `.csv`[cite: 8].
+* **`Docs/`**: Incluye el código fuente en LaTeX (`main.tex`) y el artículo científico compilado en formato PDF[cite: 5, 8].
+* **`results/`**: Contiene las gráficas y capturas de los resultados experimentales[cite: 8].
 
-## Estado del proyecto
+## 📊 Estado del Proyecto
+* **Estado actual:** Finalizado y sincronizado con éxito en el repositorio remoto.
 
-**Avance actual:** elaboración del artículo científico hasta la metodología.
-
-### Actividades realizadas
-
-- [x] Selección de los algoritmos: Quick Sort y Merge Sort.
-- [x] Diseño inicial del experimento.
-- [x] Elaboración del archivo LaTeX del artículo.
-- [ ] Validación definitiva de las mediciones.
-- [ ] Análisis estadístico de los resultados.
-- [ ] Elaboración de tablas y gráficos.
-- [ ] Redacción de resultados y conclusiones.
-
-## Estructura del repositorio
-
-- `main.tex`: código fuente del artículo científico.
-
-## Autor
-
-Layme Quispe Brus Emerson
-
-Universidad Nacional Jorge Basadre Grohmann  
-Tacna, Perú.
+## ✍️ Autor
+* **Layme Quispe Brus Emerson**  
+* **Universidad Nacional Jorge Basadre Grohmann (UNJBG)**  
+* Tacna, Perú
