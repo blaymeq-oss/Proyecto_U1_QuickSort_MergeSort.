@@ -22,6 +22,9 @@ El repositorio se encuentra organizado bajo los estándares académicos exigidos
 ## Estado del Proyecto
 * **Estado actual:** Finalizado y sincronizado con éxito en el repositorio remoto.
 
+## Video del Proyecto
+* **Enlace:** https://youtu.be/PgTsd3xDYDw
+
 ## Autor
 * **Layme Quispe Brus Emerson**  
 * **Universidad Nacional Jorge Basadre Grohmann (UNJBG)**  
