@@ -1,0 +1,174 @@
+\begin{filecontents*}{referencias.bib}
+@book{cormen2022,
+  author    = {Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford},
+  title     = {Introduction to Algorithms},
+  edition   = {4},
+  year      = {2022},
+  publisher = {The MIT Press}
+}
+@book{sedgewick2011,
+  author    = {Sedgewick, Robert and Wayne, Kevin},
+  title     = {Algorithms},
+  edition   = {4},
+  year      = {2011},
+  publisher = {Addison-Wesley}
+}
+@book{joyanes2020,
+  author    = {Joyanes Aguilar, Luis},
+  title     = {Fundamentos de Programaci{\'o}n: Algoritmos, estructura de datos y objetos},
+  edition   = {5},
+  year      = {2020},
+  publisher = {McGraw-Hill}
+}
+\end{filecontents*}
+
+\documentclass[12pt,a4paper,twocolumn]{article}
+
+% ==================== FORMATO GENERAL ====================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,english]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{csquotes}
+\usepackage{booktabs}
+\usepackage{graphicx} % Necesario para \includegraphics
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage[style=apa,backend=biber,sortcites=true]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{referencias.bib}
+
+\setstretch{1.15}
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{0.7cm}
+\hypersetup{colorlinks=true,allcolors=black}
+
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{12}{14}\selectfont}
+  {\thesection.}{0.5em}{}
+\titleformat{\subsection}
+  {\normalfont\bfseries\fontsize{12}{14}\selectfont}
+  {\thesubsection}{0.5em}{}
+
+\begin{document}
+\onecolumn
+
+\begin{center}
+{\fontsize{16}{19}\selectfont\bfseries
+Análisis comparativo del rendimiento de Quick Sort y Merge Sort bajo diferentes patrones de entrada\par}
+
+\vspace{0.25cm}
+
+{\fontsize{14}{17}\selectfont\bfseries
+Comparative Performance Analysis of Quick Sort and Merge Sort Under Different Input Patterns\par}
+
+\vspace{0.5cm}
+
+{\fontsize{12}{14}\selectfont
+\textbf{Layme Quispe Brus Emerson}\textsuperscript{1}\par
+\vspace{0.1cm}
+{\small
+\textsuperscript{1} Escuela profesional de informática y sistemas,
+Universidad Nacional Jorge Basadre Grohmann, Tacna, Perú.\\
+Correo institucional: blaymeq@unjbg.edu.pe\\
+}
+}
+\end{center}
+
+\vspace{0.2cm}
+
+\selectlanguage{spanish}
+\noindent{\fontsize{11}{13}\selectfont\textbf{Resumen.}}
+{\fontsize{11}{13}\selectfont
+\textbf{Objetivo:} Comparar experimentalmente el rendimiento de Quick Sort y Merge Sort implementados en C++. \textbf{Métodos:} Se evaluaron tres tamaños de entrada ($1\,000$, $10\,000$ y $100\,000$ elementos) y cinco patrones de datos con 30 repeticiones por condición, midiendo el tiempo de ejecución y el número de comparaciones. \textbf{Resultados:} Merge Sort mostró un crecimiento temporal estable ante los distintos patrones, mientras que Quick Sort evidenció variaciones significativas en el número de operaciones de comparación según el orden inicial de los datos. \textbf{Conclusiones:} Se confirma empíricamente la sensibilidad de Quick Sort frente a la estabilidad asintótica de Merge Sort bajo las condiciones evaluadas.
+\par}
+
+\vspace{0.15cm}
+\noindent{\fontsize{11}{13}\selectfont\textbf{Palabras clave:}}
+{\fontsize{11}{13}\selectfont Quick Sort; Merge Sort; algoritmos de ordenamiento; análisis experimental; complejidad algorítmica.\par}
+
+\vspace{0.3cm}
+
+\selectlanguage{english}
+\noindent{\fontsize{11}{13}\selectfont\textbf{Abstract.}}
+{\fontsize{11}{13}\selectfont
+\textbf{Objective:} To experimentally compare the performance of Quick Sort and Merge Sort implemented in C++. \textbf{Methods:} Three input sizes ($1,000$, $10,000$, and $100,000$ elements) and five data patterns with 30 repetitions per condition were evaluated, measuring execution time and number of comparisons. \textbf{Results:} Merge Sort showed stable time growth across different patterns, whereas Quick Sort exhibited significant variations in comparison counts depending on the initial data order. \textbf{Conclusions:} Quick Sort's sensitivity is empirically confirmed compared to Merge Sort's asymptotic stability under the evaluated conditions.
+\par}
+
+\vspace{0.15cm}
+\noindent{\fontsize{11}{13}\selectfont\textbf{Keywords:}}
+{\fontsize{11}{13}\selectfont Quick Sort; Merge Sort; sorting algorithms; experimental analysis; algorithmic complexity.\par}
+
+\vspace{0.35cm}
+\twocolumn
+
+\section{Introducción}
+El ordenamiento es una operación fundamental en el procesamiento de datos, ya que organiza elementos de acuerdo con un criterio y facilita tareas posteriores de búsqueda, análisis y procesamiento. La elección de un algoritmo puede afectar el tiempo de ejecución y el uso de memoria, especialmente cuando aumenta el volumen de datos.
+
+Quick Sort y Merge Sort son algoritmos clásicos basados en la estrategia de divide y vencerás, cuyas estructuras de datos y principios de ordenamiento se estudian en la literatura especializada \parencite{cormen2022, sedgewick2011, joyanes2020}. Quick Sort selecciona un pivote y particiona el arreglo alrededor de este; su rendimiento depende de la estrategia de partición y de las características de los datos. Merge Sort divide el arreglo en segmentos, ordena cada segmento recursivamente y combina los resultados. Estos algoritmos y sus características se estudian en textos clásicos de algoritmos \parencite{cormen2022,sedgewick2011}.
+
+En términos teóricos, Quick Sort presenta un tiempo esperado de \(O(n\log n)\), aunque su peor caso puede ser \(O(n^2)\). Merge Sort mantiene un tiempo \(O(n\log n)\) en los casos mejor, promedio y peor; en implementaciones habituales sobre arreglos requiere memoria auxiliar proporcional a \(n\) \parencite{cormen2022}. No obstante, la complejidad teórica no describe por sí sola todos los efectos de una ejecución concreta. La implementación, el compilador, el hardware y la distribución inicial de los datos pueden influir en las mediciones.
+
+El objetivo de este trabajo es comparar experimentalmente el rendimiento de Quick Sort y Merge Sort implementados en C++ bajo distintos tamaños y patrones de entrada, mediante mediciones del tiempo de ejecución y de operaciones internas. Como hipótesis descriptiva, se espera que Merge Sort presente un comportamiento temporal relativamente consistente entre los patrones estudiados, mientras que Quick Sort muestre mayor sensibilidad al orden inicial de los elementos.
+
+\section{Método}
+\subsection{Diseño experimental}
+Se realizará un estudio cuantitativo, experimental y comparativo. Las variables independientes serán el algoritmo, el tamaño del arreglo y el patrón de entrada. Las variables dependientes serán el tiempo de ejecución, las comparaciones, los intercambios, los movimientos y la profundidad máxima de recursión. Para mantener una comparación consistente, ambos algoritmos procesarán los mismos datos iniciales en cada repetición.
+
+\subsection{Algoritmos y variantes}
+Quick Sort se implementará mediante una partición con dos índices y un pivote seleccionado como el elemento central. Merge Sort dividirá recursivamente el arreglo en dos segmentos y los combinará en orden mediante un arreglo auxiliar. La complejidad temporal promedio esperada de Quick Sort es \(O(n\log n)\) (peor caso \(O(n^2)\)) y para Merge Sort es \(O(n\log n)\) en todos los casos \parencite{cormen2022}.
+
+\subsection{Entorno de ejecución}
+Los algoritmos se desarrollarán en C++ y se ejecutarán en Dev-C++. La generación de datos utilizará el generador pseudoaleatorio \texttt{mt19937} con semillas registradas.
+
+\subsection{Generación de datos, tamaños y patrones}
+Se evaluarán tres tamaños (\(n=1\,000\), \(n=10\,000\), \(n=100\,000\)) y cinco patrones: \textbf{Aleatorio}, \textbf{Ascendente}, \textbf{Descendente}, \textbf{Casi ordenado} y \textbf{Con duplicados}. Cada algoritmo se ejecutará 30 veces por combinación, totalizando 900 registros experimentales.
+
+\subsection{Procedimiento de medición}
+Se utilizará \texttt{steady\_clock} promediando lotes de 20 ejecuciones sobre copias preparadas previamente para aislar el tiempo de medición del impacto de E/S y asignaciones de memoria.
+
+\subsection{Análisis de los datos}
+Se calcularán estadísticos descriptivos (media, desviación estándar) y se procesarán a través de las figuras y tablas comparativas correspondientes.
+
+\section{Resultados}
+
+Tras la ejecución automatizada del diseño experimental, se recopilaron y validaron un total de 900 registros experimentales (450 por cada algoritmo), abarcando los tres tamaños de entrada y los cinco patrones evaluados con 30 repeticiones por condición.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{chart.png}
+    \caption{Curvas de tiempo de ejecución promedio de MergeSort y QuickSort en función del tamaño de entrada ($n$).}
+    \label{fig:tiempo_n}
+\end{figure}
+
+En la Figura~\ref{fig:tiempo_n} se presenta la evolución del tiempo de ejecución promedio en milisegundos conforme se incrementa el tamaño del arreglo (\(n\)). Los registros indican que ambos algoritmos escalan de manera eficiente para \(n = 1\,000\) y \(n = 10\,000\); sin embargo, al alcanzar el límite superior de \(n = 100\,000\), se evidencia una divergencia en la pendiente de crecimiento temporal entre ambas implementaciones.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{Comparación de Operaciones según el Patrón de Entrada.png}
+    \caption{Comparación de operaciones (número de comparaciones) según el patrón de entrada para ambos algoritmos.}
+    \label{fig:comparaciones_patron}
+\end{figure}
+
+Por otro lado, la Figura~\ref{fig:comparaciones_patron} detalla el comportamiento operacional en función del patrón de entrada evaluado. Los datos reflejan que Merge Sort mantiene un volumen de comparaciones notablemente constante y estable a través de los cinco escenarios (aleatorio, ascendente, casi ordenado, descendente y duplicados). En contraparte, Quick Sort exhibe variaciones importantes en el número total de operaciones de comparación, registrando picos elevados y fluctuaciones notables según la disposición inicial de los elementos en la muestra.
+
+\section{Discusión}
+Los resultados obtenidos validan parcialmente las expectativas teóricas planteadas en la literatura \parencite{cormen2022}. Mientras que Merge Sort exhibe un comportamiento robusto e independiente del orden inicial de los elementos, Quick Sort muestra fluctuaciones significativas en el conteo de comparaciones según el patrón de entrada. Entre las limitaciones del estudio se encuentran el uso de un único entorno de hardware y la posible influencia de la profundidad de recursión en arreglos con configuraciones desfavorables.
+
+\section{Conclusiones}
+\begin{itemize}
+    \item Merge Sort demuestra una alta estabilidad temporal y operacional ante los distintos patrones de entrada evaluados.
+    \item Quick Sort presenta un rendimiento competitivo en arreglos generales, pero exhibe marcada sensibilidad en las comparaciones dependiendo del ordenamiento inicial de los datos.
+    \item La metodología basada en lotes y la validación automática de copias garantizó la confiabilidad de los 900 registros experimentales obtenidos.
+    \item El análisis empírico complementa adecuadamente la teoría de complejidad asintótica al revelar el comportamiento real y operativo de los algoritmos en C++.
+\end{itemize}
+
+\onecolumn
+\printbibliography[title={Referencias}]
+
+\end{document}

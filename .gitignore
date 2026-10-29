@@ -1,0 +1,21 @@
+# Archivos auxiliares de LaTeX
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
+# Compilaciones y ejecutables de C++
+*.exe
+*.o
+*.obj
+debug/
+release/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
